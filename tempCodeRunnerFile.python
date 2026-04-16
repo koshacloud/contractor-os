@@ -1,0 +1,6 @@
+print("hello world")
+price = float(input('Enter job price:'))
+if price > 1000:
+    print('High value job')
+else:
+    print('Low value Job')
