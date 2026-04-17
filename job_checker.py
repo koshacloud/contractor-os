@@ -1,7 +1,26 @@
+import json # allows storage of data in json file format
+
 Jobs = [] #  Creates a list (storage)
+
+def load_jobs(): # defines function that loads job data from json file
+    global Jobs
+    try:
+        with open("jobs.json","r") as file:
+            Jobs = json.load(file)
+    except FileNotFoundError:
+        Jobs = [] # if file not found, initializes empty list
+    except json.JsondecodeError:
+        Jobs = [] # if json is invalid, initializes empty list
+
+def save_jobs(): # defines function that saves jobs to json
+    with open ("jobs.json","w") as file:
+        json.dump(Jobs,file,indent=4) # saves the Jobs list to a file named "jobs.json" in JSON format, with an indentation of 4 spaces for better readability.
+
+load_jobs() # Load existing jobs when the program starts
+
 while True: # This creates a loop
     print("All Year Roofing and Construction") # lines 3-8 express a user interface
-    print("Brito Systems: ContractorOS v0.1")
+    print("Brito Systems: ContractorOS v0.2")
     print("Early Development Software")
     print("Software Engineer: Austin Brito")
     print(" Hello Mark, welcome to your job checker. You can add a job, show total profit, clear all jobs, find a job by name, or exit the program. " \
@@ -25,6 +44,10 @@ while True: # This creates a loop
             "additional_fees": additional_fees,
             "profit": profit
         })
+
+        save_jobs() # this line calls the save_jobs() function to save the updated list of jobs to the "jobs.json" file, ensuring that the new job is stored persistently for future access.
+        print("Job added successfully.")
+
         total_profit = sum(job["profit"] for job in Jobs)
         if price > 5000: # lines 28-43 evaluate the price and profit of the job and categorize it accordingly, providing feedback to the user about the value and efficiency of the job based on predefined thresholds.
             print(name, "High Value Job")
@@ -46,6 +69,7 @@ while True: # This creates a loop
         print("Current Total Profit:", total_profit)
     elif command == 'clear': # if the command isnt 'add' or 'show', checks if command is 'clear' if the user types 'clear', the program will remove all jobs from the system, effectively resetting the job list and clearing any stored data about previous jobs.
          Jobs.clear()
+         save_jobs() # this line calls the save_jobs() function to save the now-empty list of jobs to the "jobs.json" file, ensuring that all previous job data is removed from persistent storage as well.
          print("All jobs erased")
     elif command =='find': # if the command isnt 'add', 'show', or 'clear' checks if command is 'find' if the user types 'find', the program will prompt the user to enter a job name and then search through the list of jobs to find any that match the provided name. If a matching job is found, its details (name, location, price, material cost, labor charge, additional fees, and profit) will be displayed. If no matching job is found, a message indicating that the job was not found will be printed.
         search_name = input("Enter job name to find: ") 
