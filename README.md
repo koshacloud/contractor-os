@@ -11,7 +11,7 @@ A Python CLI-based system for tracking contractor jobs, calculating profit, and 
 - Python
 - Command Line Interface (ClI)
 # Current Status
-In development (v0.1)
+In development (v0.2)
 Actively being improved with updated and new features and better data handling
 # Future Improvements
 - File storage
