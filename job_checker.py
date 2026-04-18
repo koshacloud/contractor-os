@@ -23,9 +23,9 @@ while True: # This creates a loop
     print("Brito Systems: ContractorOS v0.2")
     print("Early Development Software")
     print("Software Engineer: Austin Brito")
-    print(" Hello Mark, welcome to your job checker. You can add a job, show total profit, clear all jobs, find a job by name, or exit the program. " \
+    print(" Hello Mark, welcome to your job checker. You can add a job, show total profit, clear all jobs, find a job by name, edit a job, or exit the program. " \
     "")
-    command = input("Type 'add', 'show', 'clear', 'find', or 'exit': ").strip().lower() # this line adds the interactive element to the program, allowing the user to input commands and interact with the job checker system. The input is processed to ensure it is in a consistent format (lowercase and stripped of extra whitespace) for easier command handling.
+    command = input("Type 'add', 'show', 'clear', 'find', 'edit', or 'exit': ").strip().lower() # this line adds the interactive element to the program, allowing the user to input commands and interact with the job checker system. The input is processed to ensure it is in a consistent format (lowercase and stripped of extra whitespace) for easier command handling.
     
     if command == 'add': # if the user types 'add', the program will execute the following block of code to add a new job to the system.
         name = input("Enter job name: ")
@@ -86,6 +86,47 @@ while True: # This creates a loop
                 break
         else:
             print("Job not found.")
+    elif command == 'edit': # if the command isnt 'add', 'show', 'clear', or 'find' checks if command is 'edit' if the user types 'edit', the program will prompt the user to enter a job name and then search through the list of jobs to find any that match the provided name. If a matching job is found, the program will allow the user to edit the details of that job (name, location, price, material cost, labor charge, additional fees) and then recalculate the profit based on the updated information. If no matching job is found, a message indicating that the job was not found will be printed.
+        search_name = input("Enter job name to edit: ")
+
+        found_jobs = None
+        for job in Jobs:
+            if job["name"] == search_name:
+                found_jobs = job
+                break  
+        if found_jobs:
+            print("Job found. Leave blank to keep current value.")
+
+            new_name = input(f"Enter new name for {found_jobs['name']}: ").strip()
+            if new_name:
+                found_jobs["name"] = new_name
+            new_location = input(f"Enter new location for {found_jobs['name']}: ").strip()
+            if new_location:
+                found_jobs["location"] = new_location
+            new_price = input(f"Enter new price for {found_jobs['name']}: ").strip()
+            if new_price:
+                found_jobs["price"] = float(new_price)
+            new_material = input(f"Enter new material cost for {found_jobs['name']}: ").strip()
+            if new_material:
+                found_jobs["material"] = float(new_material)
+            new_labor = input(f"Enter new labor charge for {found_jobs['name']}: ").strip()
+            if new_labor:
+                found_jobs["labor"] = float(new_labor)
+            new_additional_fees = input(f"Enter new additional fees for {found_jobs['name']}: ").strip()
+            if new_additional_fees:
+                found_jobs["additional_fees"] = float(new_additional_fees)
+                found_jobs["profit"] = (
+                    found_jobs["price"]
+                    - found_jobs["material"]
+                    - found_jobs["labor"]
+                    - found_jobs["additional_fees"]
+                )
+
+                save_jobs()
+                print("Job updated successfully.")
+
+        else:print("job not found.")
+
     elif command == 'exit': # if the command isnt 'add', 'show', 'clear', or 'find' checks if command is 'exit' if the user types 'exit', the program will calculate and display the total profit from all jobs currently stored in the system, evaluate whether the overall business is profitable based on a predefined threshold, and then terminate the program with a goodbye message.
         print("Goodbye")
         break
