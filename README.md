@@ -13,6 +13,8 @@ A Python CLI-based system for tracking contractor jobs, calculating profit, and 
 # Current Status
 In development (v0.2)
 Actively being improved with updated and new features and better data handling
+# Version Improvements
+-Json Memory
 # Future Improvements
 - Edit and delete individual jobs
 - Job status tracking(quote, in progress, completed)
