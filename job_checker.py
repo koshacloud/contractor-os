@@ -2,8 +2,8 @@ import json # allows storage of data in json file format
 
 Jobs = [] #  Creates a list (storage)
 
-def load_jobs(): # defines function that loads job data from json file
-    global Jobs
+def load_jobs(): # defines function that loads job data from json file 
+    global Jobs # makes sure we are dealing with the jobs list defined at the beginning of the program. additionally, lines 5-20 handles errors 
     try:
         with open("jobs.json","r") as file:
             Jobs = json.load(file)
@@ -86,7 +86,7 @@ while True: # This creates a loop
                 break
         else:
             print("Job not found.")
-    elif command == 'exit': #if the command isnt 'add', 'show', 'clear', or 'find' checks if command is 'exit' if the user types 'exit', the program will calculate and display the total profit from all jobs currently stored in the system, evaluate whether the overall business is profitable based on a predefined threshold, and then terminate the program with a goodbye message.
+    elif command == 'exit': # if the command isnt 'add', 'show', 'clear', or 'find' checks if command is 'exit' if the user types 'exit', the program will calculate and display the total profit from all jobs currently stored in the system, evaluate whether the overall business is profitable based on a predefined threshold, and then terminate the program with a goodbye message.
         print("Goodbye")
         break
     else: # if the command does not match any of the predefined commands ('add', 'show', 'clear', 'find', or 'exit'), the program will execute this block of code, which simply prints an error message indicating that the command is invalid and prompts the user to try again.
