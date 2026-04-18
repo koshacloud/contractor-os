@@ -1,0 +1,29 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+env/
+venv/
+ENV/
+.venv/
+.Python
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code workspace and settings
+.vscode/
+
+# Temporary files from code runners and editors
+tempCodeRunnerFile.python
+Python information
+
+default.log
+*.log
